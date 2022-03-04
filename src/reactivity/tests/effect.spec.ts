@@ -86,4 +86,14 @@ describe("effect", () => {
         expect(onStop).toBeCalledTimes(1);
 
     })
+    // it('effect max stack', () => {
+    //     const obj = reactive({
+    //         foo: 1
+    //     })
+    //     let dummy;
+    //     effect(() => {
+    //         dummy = obj.foo++
+    //     })
+    //     expect(dummy).toBe(1);
+    // });
 })

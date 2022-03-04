@@ -15,8 +15,6 @@ let a = reactive({
 });
 let b;
 effect(() => {
-    b = a.number + 10
-    console.log(b)
+    b = ++a.number;
 })
-
-a.number = 20;
+console.log(b);
