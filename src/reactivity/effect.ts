@@ -74,7 +74,7 @@ export function isTracking() {
 export function trigger(target, key) {
     let depsMap = targetMap.get(target);
     let dep = depsMap.get(key);
-    trackEffects(dep);
+    triggerEffects(dep);
 }
 
 export function triggerEffects(dep) {
