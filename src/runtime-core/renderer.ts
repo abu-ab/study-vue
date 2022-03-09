@@ -12,8 +12,15 @@ export function render(vnode, container) {
 
 function patch(vnode, container) {
     // 处理组件
-    processComponent(vnode, container);
     // TODO 是不是一个element类型
+    // 是element 那么就应该处理element
+    // 如何去区分是element类型还是component类型
+    processElement();
+
+    processComponent(vnode, container);
+
+
+
 }
 
 function processComponent(vnode: any, container: any) {

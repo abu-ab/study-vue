@@ -29,7 +29,7 @@ function handleSetupResult(instance, setupResult: any) {
     // TODO function
 
     if (typeof setupResult === "object") {
-        instance.setup.state = setupResult;
+        instance.setupState = setupResult;
     }
 
     finishComponentSetup(instance);
