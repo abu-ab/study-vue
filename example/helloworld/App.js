@@ -9,7 +9,20 @@ export const App = {
 
     render() {
         // ui逻辑
-        return h("div", "hi," + this.msg)
+        return h("div", {
+                id: 'root',
+                class: ['red', 'hear']
+            },
+            // string
+            // "hi," + this.msg
+            // "hi, mini-vue"
+            // array
+            [h("p", {
+                class: 'red'
+            }, "h1"), h("p", {
+                class: "blue"
+            }, 'mini-vue')]
+        )
     },
     setup() {
         // composition api

@@ -1,3 +1,4 @@
+import { isObject } from "../shared/index";
 import { createComponentInstance, setupComponent } from "./component";
 
 /**
@@ -15,12 +16,43 @@ function patch(vnode, container) {
     // TODO 是不是一个element类型
     // 是element 那么就应该处理element
     // 如何去区分是element类型还是component类型
-    processElement();
+    console.log(vnode.type);
+    if (typeof vnode.type === "string") {
+        processElement(vnode, container);
+    } else if (isObject(vnode.type)) {
+        processComponent(vnode, container);
+    }
+}
 
-    processComponent(vnode, container);
+function processElement(vnode: any, container: any) {
+    // init
+    mountElement(vnode, container);
+}
+
+function mountElement(vnode: any, container: any) {
+    const el = document.createElement(vnode.type);
+    const { children, props } = vnode
+    // string类型 array类型
+    console.log(children);
+    if (typeof children === "string") {
+        el.textContent = children;
+    } else if (Array.isArray(children)) {
+        // vnode
+        mountChildren(vnode, el);
+
+    }
+    for (const key in props) {
+        const val = props[key];
+        el.setAttribute(key, val);
+    }
+    container.append(el);
+}
 
 
-
+function mountChildren(vnode: any, container: any) {
+    vnode.children.forEach(v => {
+        patch(v, container);
+    });
 }
 
 function processComponent(vnode: any, container: any) {
@@ -39,9 +71,11 @@ function mountComponent(vnode, container) {
 
 
 function setupRenderEffect(instance, container) {
-    const subTree = instance.render();
+    const subTree = instance.render;
     // vnode -> element -> mountElement
     patch(subTree, container);
 
 }
+
+
 

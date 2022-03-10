@@ -1,3 +1,4 @@
+import pkg from "./package.json"
 import typescript from "@rollup/plugin-typescript"
 export default {
     input: "./src/index.ts",
@@ -6,11 +7,13 @@ export default {
         // 2. esm
         {
             format: "cjs",
-            file: "lib/guide-mini-vue.cjs.js",
+            file: pkg.main,
+            sourcemap: true,
         },
         {
             format: "es",
-            file: "lib/guide-mini-vue.esm.js",
+            file: pkg.module,
+            sourcemap: true,
         }
     ],
     plugins: [
