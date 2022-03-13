@@ -30,7 +30,8 @@ function processElement(vnode: any, container: any) {
 }
 
 function mountElement(vnode: any, container: any) {
-    const el = document.createElement(vnode.type);
+    // vnode -> element -> div
+    const el = (vnode.el = document.createElement(vnode.type));
     const { children, props } = vnode
     // string类型 array类型
     console.log(children);
@@ -60,21 +61,24 @@ function processComponent(vnode: any, container: any) {
     mountComponent(vnode, container);
 }
 
-function mountComponent(vnode, container) {
+function mountComponent(initialVNode, container) {
     // 通过虚拟节点创建组件实例对象
-    const instance = createComponentInstance(vnode);
+    const instance = createComponentInstance(initialVNode);
     setupComponent(instance);
 
-    setupRenderEffect(instance, container);
+    setupRenderEffect(instance, initialVNode, container);
 }
 
 
 
-function setupRenderEffect(instance, container) {
-    const subTree = instance.render;
+function setupRenderEffect(instance, initialVNode, container) {
+    const { proxy } = instance;
+    const subTree = instance.render.call(proxy);
     // vnode -> element -> mountElement
     patch(subTree, container);
 
+    // element -> mount
+    initialVNode.el = subTree.el
 }
 
 
