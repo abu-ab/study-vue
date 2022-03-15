@@ -1,6 +1,9 @@
 import {
     h
 } from "../../lib/guide-mini-vue.esm.js";
+import {
+    Foo
+} from "./Foo.js";
 window.self = null;
 export const App = {
     // .vue
@@ -17,14 +20,14 @@ export const App = {
                 onClick() {
                     alert("123")
                 },
-                onMousedown(){
+                onMousedown() {
                     console.log("13456")
                 }
             },
             // setupState
             // this.$el ->get root element
             // string
-            "hi," + this.msg
+            // "hi," + this.msg
             // "hi, mini-vue"
             // array
             // [h("p", {
@@ -32,6 +35,9 @@ export const App = {
             // }, "h1"), h("p", {
             //     class: "blue"
             // }, 'mini-vue')]
+            [h("div", {}, "hi" + this.msg), h(Foo, {
+                count: 1
+            })]
         )
     },
     setup() {

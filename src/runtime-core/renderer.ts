@@ -43,7 +43,6 @@ function mountElement(vnode: any, container: any) {
     const el = (vnode.el = document.createElement(vnode.type));
     const { children, props, shapeFlag } = vnode
     // string类型 array类型
-    console.log(children);
     if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
         // typeof children === "string"
         // text_children 
@@ -56,7 +55,6 @@ function mountElement(vnode: any, container: any) {
 
     }
     for (const key in props) {
-        console.log(key);
         const val = props[key];
         // 具体的 click -》通用
         // on + event name
