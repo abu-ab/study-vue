@@ -56,7 +56,16 @@ function mountElement(vnode: any, container: any) {
 
     }
     for (const key in props) {
+        console.log(key);
         const val = props[key];
+        // 具体的 click -》通用
+        // on + event name
+        // onMousedown
+        const isOn = (key: string) => /^on[A-Z]/.test(key);
+        if (isOn(key)) {
+            const event = key.slice(2).toLowerCase();
+            el.addEventListener(event, val);
+        }
         el.setAttribute(key, val);
     }
     container.append(el);

@@ -13,7 +13,13 @@ export const App = {
         window.self = this;
         return h("div", {
                 id: 'root',
-                class: ['red', 'hear']
+                class: ['red', 'hear'],
+                onClick() {
+                    alert("123")
+                },
+                onMousedown(){
+                    console.log("13456")
+                }
             },
             // setupState
             // this.$el ->get root element
