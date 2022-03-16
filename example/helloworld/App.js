@@ -17,12 +17,12 @@ export const App = {
         return h("div", {
                 id: 'root',
                 class: ['red', 'hear'],
-                onClick() {
-                    alert("123")
-                },
-                onMousedown() {
-                    console.log("13456")
-                }
+                // onClick() {
+                //     alert("123")
+                // },
+                // onMousedown() {
+                //     console.log("13456")
+                // }
             },
             // setupState
             // this.$el ->get root element
@@ -36,7 +36,14 @@ export const App = {
             //     class: "blue"
             // }, 'mini-vue')]
             [h("div", {}, "hi" + this.msg), h(Foo, {
-                count: 1
+                // on + Event
+                onAdd(a, b) {
+                    console.log("a", a, "b", b)
+                    console.log("onAdd")
+                },
+                onAddFoo() {
+                    console.log("add fo0")
+                }
             })]
         )
     },
