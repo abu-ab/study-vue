@@ -36,15 +36,30 @@ export const App = {
             //     class: "blue"
             // }, 'mini-vue')]
             [h("div", {}, "hi" + this.msg), h(Foo, {
-                // on + Event
-                onAdd(a, b) {
-                    console.log("a", a, "b", b)
-                    console.log("onAdd")
+                    // on + Event
+                    onAdd(a, b) {
+                        console.log("a", a, "b", b)
+                        console.log("onAdd")
+                    },
+                    onAddFoo() {
+                        console.log("add fo0")
+                    }
+                    // slots 可以为一个虚拟节点，也可以为一个数组
                 },
-                onAddFoo() {
-                    console.log("add fo0")
+                // [h("p", {}, "123"), h("p", {}, "456")]
+                // 具名插槽
+                // {
+                //     header: h("p", {}, "header"),
+                //     footer: h("p", {}, "footer")
+                // }
+                // 作用域插槽
+                {
+                    header: ({
+                        age
+                    }) => h("p", {}, "header" + age),
+                    footer: () => h("p", {}, "footer")
                 }
-            })]
+            )]
         )
     },
     setup() {
