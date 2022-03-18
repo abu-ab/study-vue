@@ -56,7 +56,7 @@ export const App = {
                 {
                     header: ({
                         age
-                    }) => h("p", {}, "header" + age),
+                    }) => [h("p", {}, "header" + age), h("p", {}, "23")],
                     footer: () => h("p", {}, "footer")
                 }
             )]
