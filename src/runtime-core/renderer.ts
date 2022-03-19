@@ -1,6 +1,7 @@
 import { isObject } from "../shared/index";
 import { ShapeFlags } from "../shared/ShapeFlags";
 import { createComponentInstance, setupComponent } from "./component";
+import { Fragment } from "./vnode";
 
 /**
  * 
@@ -22,15 +23,29 @@ function patch(vnode, container) {
     // 是element 那么就应该处理element
     // 如何去区分是element类型还是component类型
     console.log(vnode.type);
-    const { shapeFlag } = vnode
-    // if (typeof vnode.type === "string") {
-    if (shapeFlag & ShapeFlags.ELEMENT) {
-        processElement(vnode, container);
-        // STATEFUL_COMPONENT
-    } else if (shapeFlag & ShapeFlags.STATEFULE_COMPONENT) {
-        // else if (isObject(vnode.type)) {
-        processComponent(vnode, container);
+    const { type, shapeFlag } = vnode;
+
+    // Fragment -> 只渲染children
+    switch (type) {
+        case Fragment:
+            processFragment(vnode, container);
+            break;
+        default:
+            // if (typeof vnode.type === "string") {
+            if (shapeFlag & ShapeFlags.ELEMENT) {
+                processElement(vnode, container);
+                // STATEFUL_COMPONENT
+            } else if (shapeFlag & ShapeFlags.STATEFULE_COMPONENT) {
+                // else if (isObject(vnode.type)) {
+                processComponent(vnode, container);
+            }
+            break;
     }
+}
+
+function processFragment(vnode: any, container: any) {
+    // Implement
+    mountChildren(vnode, container);
 }
 
 function processElement(vnode: any, container: any) {
@@ -100,6 +115,5 @@ function setupRenderEffect(instance, initialVNode, container) {
     // element -> mount
     initialVNode.el = subTree.el
 }
-
 
 

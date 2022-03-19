@@ -1,5 +1,5 @@
 import { ShapeFlags } from "../shared/ShapeFlags";
-
+export const Fragment = Symbol("Fragment");
 /**
  * 
  * @param type 
