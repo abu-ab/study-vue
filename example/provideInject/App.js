@@ -18,13 +18,29 @@ const Provider = {
 }
 
 const ProviderTwo = {
-    name: "provider",
+    name: "ProviderTwo",
     render() {
         return h("div", {},
-            [h("div", {}, "ProviderTwo"), h(Consumer)]
+            [h("div", {}, "ProviderTwo"), h(ProviderThree)]
         )
     },
-    setup() {}
+    setup() {
+        provide("foo", "ProviderTwo")
+    }
+}
+const ProviderThree = {
+    name: "ProviderThree",
+    render() {
+        return h("div", {},
+            [h("div", {}, "ProviderThree-" + this.foo), h(Consumer)]
+        )
+    },
+    setup() {
+        const foo = inject("foo")
+        return {
+            foo
+        }
+    }
 }
 
 const Consumer = {
