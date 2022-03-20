@@ -13,6 +13,8 @@ export function createApp(rootComponent) {
          * element实例
          * @param rootContainer 
          */
+        // TODO
+        // 如何在代码中获取容器
         mount(rootContainer) {
             // 先vnode
             // component->vnode
